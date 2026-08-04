@@ -2,13 +2,17 @@ name: BreathApp
 options:
   bundleIdPrefix: com.chuyumin
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "16.2"
+
 targets:
   BreathApp:
     type: application
     platform: iOS
     sources:
       - path: BreathApp
+      - path: Shared
+    dependencies:
+      - target: BreathWidgetExtension
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chuyumin.BreathApp
@@ -21,4 +25,29 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UIRequiresFullScreen: YES
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
         ENABLE_PREVIEWS: YES
+
+  # 라이브 액티비티용 위젯 익스텐션. 엔진은 필요 없고 표시용 모델만 쓴다.
+  BreathWidgetExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: BreathWidget
+      - path: Shared/BreathPhase.swift
+      - path: Shared/BreathActivityAttributes.swift
+    info:
+      path: BreathWidget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chuyumin.BreathApp.BreathWidget
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "호흡 위젯"
+        SKIP_INSTALL: YES

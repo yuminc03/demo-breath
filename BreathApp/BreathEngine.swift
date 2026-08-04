@@ -1,21 +1,6 @@
 import Foundation
 import Combine
 
-/// 호흡 사이클의 한 단계(들숨/멈춤/날숨)를 나타낸다.
-enum BreathPhase: CaseIterable {
-    case inhale
-    case hold
-    case exhale
-
-    var displayName: String {
-        switch self {
-        case .inhale: return "들숨"
-        case .hold: return "멈춤"
-        case .exhale: return "날숨"
-        }
-    }
-}
-
 /// 호흡 세션 전체 진행 상태를 나타낸다.
 enum BreathSessionState {
     case idle
@@ -25,12 +10,25 @@ enum BreathSessionState {
 
 /// 들숨 → 멈춤 → 날숨 사이클을 반복하며, 지정된 세션 길이가 지나면 자동으로 종료되는 호흡 엔진.
 /// UI 로직과 분리되어 독립적으로 테스트 가능하도록 설계되었다.
+///
+/// 라이브 액티비티 같은 바깥 관심사는 `onPhaseChange` / `onSessionEnd` 콜백으로만 연결하고,
+/// 엔진 자체는 ActivityKit이나 SwiftUI에 의존하지 않는다.
 final class BreathEngine: ObservableObject {
 
     @Published private(set) var sessionState: BreathSessionState = .idle
     @Published private(set) var currentPhase: BreathPhase
     @Published private(set) var remainingInPhase: TimeInterval
     @Published private(set) var remainingInSession: TimeInterval
+
+    /// 현재 단계가 시작된 시각. 라이브 액티비티가 시스템 타이머를 그릴 때 쓴다.
+    private(set) var phaseStartDate = Date()
+    /// 현재 단계가 끝나는 시각.
+    private(set) var phaseEndDate = Date()
+
+    /// 세션 시작과 단계 전환 시 호출된다. (단계, 시작 시각, 종료 시각)
+    var onPhaseChange: ((BreathPhase, Date, Date) -> Void)?
+    /// 세션이 자동 종료되거나 사용자가 중지했을 때 호출된다.
+    var onSessionEnd: (() -> Void)?
 
     let phaseDuration: TimeInterval
     let sessionDuration: TimeInterval
@@ -76,12 +74,14 @@ final class BreathEngine: ObservableObject {
         }
         RunLoop.main.add(newTimer, forMode: .common)
         timer = newTimer
+        markPhaseBoundary()
     }
 
     func stop() {
         invalidateTimer()
         sessionState = .idle
         resetState()
+        onSessionEnd?()
     }
 
     private func tick() {
@@ -107,6 +107,14 @@ final class BreathEngine: ObservableObject {
         phaseIndex = (phaseIndex + 1) % phaseOrder.count
         currentPhase = phaseOrder[phaseIndex]
         remainingInPhase = phaseDuration
+        markPhaseBoundary()
+    }
+
+    /// 새 단계의 시작·종료 시각을 기록하고 외부에 알린다.
+    private func markPhaseBoundary() {
+        phaseStartDate = Date()
+        phaseEndDate = phaseStartDate.addingTimeInterval(phaseDuration)
+        onPhaseChange?(currentPhase, phaseStartDate, phaseEndDate)
     }
 
     private func finishSession() {
@@ -114,6 +122,7 @@ final class BreathEngine: ObservableObject {
         sessionState = .finished
         remainingInSession = 0
         remainingInPhase = 0
+        onSessionEnd?()
     }
 
     private func resetState() {

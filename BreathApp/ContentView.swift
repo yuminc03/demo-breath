@@ -2,6 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var engine = BreathEngine()
+    @StateObject private var activityController = BreathActivityController()
+
+    /// 라이브 액티비티의 고정 값으로 실리는 세션 이름.
+    private let sessionName = "호흡 세션"
 
     var body: some View {
         VStack(spacing: 40) {
@@ -13,7 +17,7 @@ struct ContentView: View {
 
             CircularGaugeView(
                 progress: engine.progressInPhase,
-                color: phaseColor,
+                color: engine.currentPhase.tintColor,
                 phaseText: engine.currentPhase.displayName,
                 remainingSeconds: remainingSecondsInPhase
             )
@@ -29,13 +33,22 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
+        .task { connectLiveActivity() }
     }
 
-    private var phaseColor: Color {
-        switch engine.currentPhase {
-        case .inhale: return .blue
-        case .hold: return .purple
-        case .exhale: return .green
+    /// 엔진의 단계 전환을 라이브 액티비티로 흘려보낸다.
+    private func connectLiveActivity() {
+        let controller = activityController
+        let name = sessionName
+
+        // 앱이 강제 종료된 뒤 잠금 화면에 남아 있을 수 있는 이전 세션의 액티비티를 정리한다.
+        controller.endAll()
+
+        engine.onPhaseChange = { phase, start, end in
+            controller.apply(sessionName: name, phase: phase, start: start, end: end)
+        }
+        engine.onSessionEnd = {
+            controller.endAll()
         }
     }
 
