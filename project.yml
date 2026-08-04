@@ -68,6 +68,8 @@ targets:
       - path: Shared/BreathPhase.swift
       - path: Shared/BreathEngine.swift
       - path: Shared/CircularGaugeView.swift
+      - path: Shared/BreathHaptics.swift
+      - path: Shared/BreathVisualCue.swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chuyumin.BreathApp.watchkitapp

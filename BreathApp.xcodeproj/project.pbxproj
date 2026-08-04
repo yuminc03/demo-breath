@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		10BDA9DB6260D1C2319CF4BA /* BreathAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5100FD89D8589FA128AA6C /* BreathAppApp.swift */; };
+		13412BA6151752F4E58FFC5C /* BreathHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2F88C2094B67943923D0FF /* BreathHaptics.swift */; };
 		227E47F1D8DD90EDC76CFB93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC8675384DCC8A2ACB5BE5D /* ContentView.swift */; };
+		2CD31E5F7426B6B099843799 /* BreathVisualCue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611B8D61F10766E320B5E638 /* BreathVisualCue.swift */; };
 		32767580230215A257228B8F /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6980456A76E939A9709C1F9B /* WatchContentView.swift */; };
 		4F883F922195315E33E0A0F2 /* BreathPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF1204C05FE177A368FE710 /* BreathPhase.swift */; };
 		5056E40D8D7112DD8688F8EA /* BreathLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392C57CA0054EB71E3419B9F /* BreathLiveActivity.swift */; };
@@ -19,7 +21,9 @@
 		9677BC5EFD134B0D163AE998 /* BreathEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA71AA7C690D1FB5A780DD8 /* BreathEngine.swift */; };
 		96847C43FF13C47A0B6B87C5 /* BreathWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6670FA876198AD543D8F08D /* BreathWidgetBundle.swift */; };
 		A2EA2678C77D4D1582982B35 /* BreathActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B422D7576827890A74D8D263 /* BreathActivityAttributes.swift */; };
+		A53521FEDD01A6CE96D710DB /* BreathVisualCue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611B8D61F10766E320B5E638 /* BreathVisualCue.swift */; };
 		ADB94414B2AEC644F41732B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E6801786D91837E138D5C9 /* Assets.xcassets */; };
+		BE576DACB7AE1904C98FBC6B /* BreathHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2F88C2094B67943923D0FF /* BreathHaptics.swift */; };
 		D1A28E42827EF3DACD6EA562 /* BreathWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C9024B4478CD7956A9DC6F7C /* BreathWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D2630F86DBE0DDCDF1012FFF /* BreathEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA71AA7C690D1FB5A780DD8 /* BreathEngine.swift */; };
 		DB3184E88F9F6F098B1B6D0C /* BreathActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B422D7576827890A74D8D263 /* BreathActivityAttributes.swift */; };
@@ -53,10 +57,12 @@
 
 /* Begin PBXFileReference section */
 		09E6801786D91837E138D5C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1D2F88C2094B67943923D0FF /* BreathHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathHaptics.swift; sourceTree = "<group>"; };
 		392C57CA0054EB71E3419B9F /* BreathLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathLiveActivity.swift; sourceTree = "<group>"; };
 		3BE36060D6BAA8EE917F1FF3 /* BreathWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreathWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CA71AA7C690D1FB5A780DD8 /* BreathEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathEngine.swift; sourceTree = "<group>"; };
 		3CC8675384DCC8A2ACB5BE5D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		611B8D61F10766E320B5E638 /* BreathVisualCue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathVisualCue.swift; sourceTree = "<group>"; };
 		6980456A76E939A9709C1F9B /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
 		8450877B18274F829756D6A7 /* CircularGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularGaugeView.swift; sourceTree = "<group>"; };
 		890CD86071E59D505709C3D0 /* BreathApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BreathApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +102,9 @@
 			children = (
 				B422D7576827890A74D8D263 /* BreathActivityAttributes.swift */,
 				3CA71AA7C690D1FB5A780DD8 /* BreathEngine.swift */,
+				1D2F88C2094B67943923D0FF /* BreathHaptics.swift */,
 				EDF1204C05FE177A368FE710 /* BreathPhase.swift */,
+				611B8D61F10766E320B5E638 /* BreathVisualCue.swift */,
 				8450877B18274F829756D6A7 /* CircularGaugeView.swift */,
 			);
 			path = Shared;
@@ -239,7 +247,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9677BC5EFD134B0D163AE998 /* BreathEngine.swift in Sources */,
+				13412BA6151752F4E58FFC5C /* BreathHaptics.swift in Sources */,
 				4F883F922195315E33E0A0F2 /* BreathPhase.swift in Sources */,
+				A53521FEDD01A6CE96D710DB /* BreathVisualCue.swift in Sources */,
 				573E9BC096284CBBF1FC8327 /* BreathWatchApp.swift in Sources */,
 				5306015D1DD7C8729B72F579 /* CircularGaugeView.swift in Sources */,
 				32767580230215A257228B8F /* WatchContentView.swift in Sources */,
@@ -265,7 +275,9 @@
 				83B3929DA6072E13F67E0820 /* BreathActivityController.swift in Sources */,
 				10BDA9DB6260D1C2319CF4BA /* BreathAppApp.swift in Sources */,
 				D2630F86DBE0DDCDF1012FFF /* BreathEngine.swift in Sources */,
+				BE576DACB7AE1904C98FBC6B /* BreathHaptics.swift in Sources */,
 				92D20D7083F3F5B92273F762 /* BreathPhase.swift in Sources */,
+				2CD31E5F7426B6B099843799 /* BreathVisualCue.swift in Sources */,
 				F76B2EFC4F33444CD5020F13 /* CircularGaugeView.swift in Sources */,
 				227E47F1D8DD90EDC76CFB93 /* ContentView.swift in Sources */,
 			);

@@ -21,6 +21,11 @@ struct ContentView: View {
                 phaseText: engine.currentPhase.displayName,
                 remainingSeconds: remainingSecondsInPhase
             )
+            .breathVisualCue(
+                phase: engine.currentPhase,
+                isRunning: engine.sessionState == .running,
+                duration: engine.phaseDuration
+            )
 
             Text("세션 남은 시간 \(sessionTimeText)")
                 .font(.subheadline)
@@ -33,11 +38,11 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
-        .task { connectLiveActivity() }
+        .task { connectSideEffects() }
     }
 
-    /// 엔진의 단계 전환을 라이브 액티비티로 흘려보낸다.
-    private func connectLiveActivity() {
+    /// 엔진의 단계 전환을 라이브 액티비티와 햅틱으로 흘려보낸다.
+    private func connectSideEffects() {
         let controller = activityController
         let name = sessionName
 
@@ -45,9 +50,13 @@ struct ContentView: View {
         controller.endAll()
 
         engine.onPhaseChange = { phase, start, end in
+            BreathHaptics.play(for: phase)
             controller.apply(sessionName: name, phase: phase, start: start, end: end)
         }
-        engine.onSessionEnd = {
+        engine.onSessionEnd = { reason in
+            if reason == .completed {
+                BreathHaptics.playSessionCompleted()
+            }
             controller.endAll()
         }
     }
@@ -76,6 +85,7 @@ struct ContentView: View {
             if engine.sessionState == .running {
                 engine.stop()
             } else {
+                BreathHaptics.prepare()
                 engine.start()
             }
         } label: {

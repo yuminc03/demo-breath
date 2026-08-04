@@ -27,6 +27,11 @@ struct WatchContentView: View {
                     remainingSeconds: remainingSecondsInPhase,
                     size: gaugeSize(in: proxy.size)
                 )
+                .breathVisualCue(
+                    phase: engine.currentPhase,
+                    isRunning: engine.sessionState == .running,
+                    duration: engine.phaseDuration
+                )
 
                 footer
 
@@ -51,6 +56,22 @@ struct WatchContentView: View {
         .onAppear {
             isCrownFocused = true
             applySessionMinutes(sessionMinutes)
+            connectHaptics()
+        }
+    }
+
+    /// 단계 전환과 세션 완료를 햅틱으로 알린다.
+    ///
+    /// 워치에서는 이 햅틱이 주된 안내 수단이다. 손목을 보지 않아도
+    /// 들숨(올라가는 느낌) / 멈춤(짧은 클릭) / 날숨(내려가는 느낌)을 구분할 수 있다.
+    private func connectHaptics() {
+        engine.onPhaseChange = { phase, _, _ in
+            BreathHaptics.play(for: phase)
+        }
+        engine.onSessionEnd = { reason in
+            if reason == .completed {
+                BreathHaptics.playSessionCompleted()
+            }
         }
     }
 

@@ -8,6 +8,14 @@ enum BreathSessionState {
     case finished
 }
 
+/// 세션이 끝난 이유. 성공 햅틱처럼 "끝까지 마쳤을 때만" 반응해야 하는 곳에서 구분에 쓴다.
+enum BreathSessionEndReason {
+    /// 지정한 세션 길이를 모두 채우고 자동 종료됨.
+    case completed
+    /// 사용자가 중지 버튼을 눌러 중단됨.
+    case cancelled
+}
+
 /// 들숨 → 멈춤 → 날숨 사이클을 반복하며, 지정된 세션 길이가 지나면 자동으로 종료되는 호흡 엔진.
 /// UI 로직과 분리되어 독립적으로 테스트 가능하도록 설계되었다.
 ///
@@ -27,8 +35,8 @@ final class BreathEngine: ObservableObject {
 
     /// 세션 시작과 단계 전환 시 호출된다. (단계, 시작 시각, 종료 시각)
     var onPhaseChange: ((BreathPhase, Date, Date) -> Void)?
-    /// 세션이 자동 종료되거나 사용자가 중지했을 때 호출된다.
-    var onSessionEnd: (() -> Void)?
+    /// 세션이 끝났을 때 호출된다. 끝까지 마쳤는지(`.completed`) 중단인지(`.cancelled`) 구분해 전달한다.
+    var onSessionEnd: ((BreathSessionEndReason) -> Void)?
 
     let phaseDuration: TimeInterval
 
@@ -97,7 +105,7 @@ final class BreathEngine: ObservableObject {
         invalidateTimer()
         sessionState = .idle
         resetState()
-        onSessionEnd?()
+        onSessionEnd?(.cancelled)
     }
 
     private func tick() {
@@ -138,7 +146,7 @@ final class BreathEngine: ObservableObject {
         sessionState = .finished
         remainingInSession = 0
         remainingInPhase = 0
-        onSessionEnd?()
+        onSessionEnd?(.completed)
     }
 
     private func resetState() {
