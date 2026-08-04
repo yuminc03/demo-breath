@@ -31,10 +31,16 @@ struct CircularGaugeView: View {
                 Text(phaseText)
                     .font(.system(size: phaseFontSize, weight: .semibold))
                     .foregroundStyle(color)
-                Text("\(remainingSeconds)")
-                    .font(.system(size: secondsFontSize, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .contentTransition(.numericText())
+if #available(iOS 17.0, watchOS 10.0, *) {
+    Text("\(remainingSeconds)")
+        .font(.system(size: secondsFontSize, weight: .bold, design: .rounded))
+        .monospacedDigit()
+        .contentTransition(.numericText())
+} else {
+    Text("\(remainingSeconds)")
+        .font(.system(size: secondsFontSize, weight: .bold, design: .rounded))
+        .monospacedDigit()
+}
             }
         }
         .frame(width: size, height: size)
