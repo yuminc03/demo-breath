@@ -3,14 +3,20 @@ options:
   bundleIdPrefix: com.chuyumin
   deploymentTarget:
     iOS: "16.2"
+    watchOS: "9.0"
 
 targets:
+  # iOS 앱. Shared 전체를 포함한다.
   BreathApp:
     type: application
     platform: iOS
     sources:
       - path: BreathApp
       - path: Shared
+    # BreathWatch는 의존성으로 걸지 않는다.
+    # 내장(companion) 구성으로 바꾸면 iOS 스킴 빌드에도 watchOS 시뮬레이터 런타임이 필요해지므로,
+    # 런타임 설치 후 아래 줄의 주석을 풀어 companion으로 전환하면 된다.
+    #   - target: BreathWatch
     dependencies:
       - target: BreathWidgetExtension
     settings:
@@ -51,3 +57,26 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: "호흡 위젯"
         SKIP_INSTALL: YES
+
+  # watchOS 앱. iOS 앱과 같은 BreathEngine·CircularGaugeView를 그대로 재사용한다.
+  # ActivityKit은 watchOS에 없으므로 BreathActivityAttributes.swift는 제외한다.
+  BreathWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: BreathWatch
+      - path: Shared/BreathPhase.swift
+      - path: Shared/BreathEngine.swift
+      - path: Shared/CircularGaugeView.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chuyumin.BreathApp.watchkitapp
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "4"
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: "호흡"
+        INFOPLIST_KEY_WKApplication: YES
+        INFOPLIST_KEY_WKCompanionAppBundleIdentifier: com.chuyumin.BreathApp
+        ENABLE_PREVIEWS: YES

@@ -31,7 +31,9 @@ final class BreathEngine: ObservableObject {
     var onSessionEnd: (() -> Void)?
 
     let phaseDuration: TimeInterval
-    let sessionDuration: TimeInterval
+
+    /// 전체 세션 길이. 진행 중에는 바꿀 수 없고, 대기 상태에서만 `setSessionDuration(_:)`으로 조절한다.
+    @Published private(set) var sessionDuration: TimeInterval
 
     /// 부드러운 게이지 애니메이션을 위한 타이머 갱신 주기.
     private let tickInterval: TimeInterval = 0.05
@@ -63,6 +65,20 @@ final class BreathEngine: ObservableObject {
     var progressInSession: Double {
         guard sessionDuration > 0 else { return 0 }
         return 1 - (remainingInSession / sessionDuration)
+    }
+
+    /// 세션 길이를 바꾼다. 진행 중에는 무시되므로 사이클이 도는 도중 길이가 튀지 않는다.
+    ///
+    /// Apple Watch에서 Digital Crown으로 조절할 때 쓰인다.
+    /// - Returns: 실제로 반영되었는지 여부.
+    @discardableResult
+    func setSessionDuration(_ newValue: TimeInterval) -> Bool {
+        guard sessionState != .running, newValue > 0 else { return false }
+        guard newValue != sessionDuration else { return true }
+
+        sessionDuration = newValue
+        remainingInSession = newValue
+        return true
     }
 
     func start() {

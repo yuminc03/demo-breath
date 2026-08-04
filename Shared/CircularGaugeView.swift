@@ -1,13 +1,20 @@
 import SwiftUI
 
-/// 현재 호흡 단계와 남은 초를 원형 게이지로 크게 보여주는 뷰.
+/// 현재 호흡 단계와 남은 초를 원형 게이지로 보여주는 뷰.
+///
+/// iPhone(기본 280pt)과 Apple Watch(화면에 맞춘 작은 크기)가 같은 컴포넌트를 쓴다.
+/// 선 굵기와 글자 크기를 `size`에 비례시켜 두어, 어느 크기에서도 원본 비율이 유지된다.
+/// (280pt일 때 각각 22pt / 22pt / 72pt로 기존 iPhone 레이아웃과 같은 값이 된다.)
 struct CircularGaugeView: View {
     let progress: Double
     let color: Color
     let phaseText: String
     let remainingSeconds: Int
+    var size: CGFloat = 280
 
-    private let lineWidth: CGFloat = 22
+    private var lineWidth: CGFloat { size * 0.0786 }
+    private var phaseFontSize: CGFloat { size * 0.0786 }
+    private var secondsFontSize: CGFloat { size * 0.2571 }
 
     var body: some View {
         ZStack {
@@ -20,18 +27,17 @@ struct CircularGaugeView: View {
                 .rotationEffect(.degrees(-90))
                 .animation(.linear(duration: 0.05), value: progress)
 
-            VStack(spacing: 8) {
+            VStack(spacing: size * 0.0286) {
                 Text(phaseText)
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.system(size: phaseFontSize, weight: .semibold))
                     .foregroundStyle(color)
                 Text("\(remainingSeconds)")
-                    .font(.system(size: 72, weight: .bold, design: .rounded))
+                    .font(.system(size: secondsFontSize, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .contentTransition(.numericText())
             }
         }
-        .frame(width: 280, height: 280)
+        .frame(width: size, height: size)
     }
 }
 
