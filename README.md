@@ -178,10 +178,11 @@ Demo_Breath/
 │   ├── BreathAppApp.swift
 │   ├── ContentView.swift
 │   ├── BreathActivityController.swift   # 엔진 → 라이브 액티비티 중계
-│   └── Assets.xcassets/
+│   └── Assets.xcassets/                 # 앱 아이콘(iOS)
 ├── BreathWatch/                         # watchOS 앱 타깃
 │   ├── BreathWatchApp.swift
-│   └── WatchContentView.swift
+│   ├── WatchContentView.swift
+│   └── Assets.xcassets/                 # 앱 아이콘(watchOS)
 ├── BreathWidget/                        # 라이브 액티비티 위젯 익스텐션
 │   ├── BreathWidgetBundle.swift
 │   ├── BreathLiveActivity.swift
