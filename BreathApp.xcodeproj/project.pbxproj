@@ -16,6 +16,7 @@
 		5056E40D8D7112DD8688F8EA /* BreathLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392C57CA0054EB71E3419B9F /* BreathLiveActivity.swift */; };
 		5306015D1DD7C8729B72F579 /* CircularGaugeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450877B18274F829756D6A7 /* CircularGaugeView.swift */; };
 		573E9BC096284CBBF1FC8327 /* BreathWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A009AC856679078291A5645A /* BreathWatchApp.swift */; };
+		594FB7013E32AA488EA4F752 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E3C5B45844FDE62041E7FF /* LaunchScreen.storyboard */; };
 		83B3929DA6072E13F67E0820 /* BreathActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C15D97A962C59F8B7864535 /* BreathActivityController.swift */; };
 		92D20D7083F3F5B92273F762 /* BreathPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF1204C05FE177A368FE710 /* BreathPhase.swift */; };
 		9677BC5EFD134B0D163AE998 /* BreathEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA71AA7C690D1FB5A780DD8 /* BreathEngine.swift */; };
@@ -68,6 +69,7 @@
 		8450877B18274F829756D6A7 /* CircularGaugeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularGaugeView.swift; sourceTree = "<group>"; };
 		890CD86071E59D505709C3D0 /* BreathApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BreathApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C15D97A962C59F8B7864535 /* BreathActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathActivityController.swift; sourceTree = "<group>"; };
+		91E3C5B45844FDE62041E7FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A009AC856679078291A5645A /* BreathWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathWatchApp.swift; sourceTree = "<group>"; };
 		B422D7576827890A74D8D263 /* BreathActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathActivityAttributes.swift; sourceTree = "<group>"; };
 		BA5100FD89D8589FA128AA6C /* BreathAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathAppApp.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				8C15D97A962C59F8B7864535 /* BreathActivityController.swift */,
 				BA5100FD89D8589FA128AA6C /* BreathAppApp.swift */,
 				3CC8675384DCC8A2ACB5BE5D /* ContentView.swift */,
+				91E3C5B45844FDE62041E7FF /* LaunchScreen.storyboard */,
 			);
 			path = BreathApp;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB94414B2AEC644F41732B4 /* Assets.xcassets in Resources */,
+				594FB7013E32AA488EA4F752 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +377,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "호흡";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -526,7 +530,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "호흡";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (

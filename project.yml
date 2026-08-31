@@ -28,7 +28,10 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: "호흡"
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        # 기본 생성 런치스크린 대신 LaunchScreen.storyboard를 쓴다.
+        # 아이콘을 화면 폭의 1/2 정사각형으로 중앙 배치하려면 오토레이아웃이 필요하고,
+        # Info.plist의 UILaunchScreen 딕셔너리로는 크기를 지정할 수 없다.
+        INFOPLIST_KEY_UILaunchStoryboardName: LaunchScreen
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UIRequiresFullScreen: YES
         INFOPLIST_KEY_NSSupportsLiveActivities: YES

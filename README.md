@@ -178,7 +178,8 @@ Demo_Breath/
 │   ├── BreathAppApp.swift
 │   ├── ContentView.swift
 │   ├── BreathActivityController.swift   # 엔진 → 라이브 액티비티 중계
-│   └── Assets.xcassets/                 # 앱 아이콘(iOS)
+│   ├── LaunchScreen.storyboard          # 런치스크린
+│   └── Assets.xcassets/                 # 앱 아이콘(iOS) · 런치 아이콘
 ├── BreathWatch/                         # watchOS 앱 타깃
 │   ├── BreathWatchApp.swift
 │   ├── WatchContentView.swift
