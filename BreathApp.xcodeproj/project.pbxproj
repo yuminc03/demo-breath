@@ -70,7 +70,7 @@
 		A009AC856679078291A5645A /* BreathWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathWatchApp.swift; sourceTree = "<group>"; };
 		B422D7576827890A74D8D263 /* BreathActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathActivityAttributes.swift; sourceTree = "<group>"; };
 		BA5100FD89D8589FA128AA6C /* BreathAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathAppApp.swift; sourceTree = "<group>"; };
-		C9024B4478CD7956A9DC6F7C /* BreathWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = BreathWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9024B4478CD7956A9DC6F7C /* BreathWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BreathWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6670FA876198AD543D8F08D /* BreathWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathWidgetBundle.swift; sourceTree = "<group>"; };
 		EDF1204C05FE177A368FE710 /* BreathPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathPhase.swift; sourceTree = "<group>"; };
 		FA36F51B5B1EA78BFF57D9E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -461,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S73VSPTS8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BreathWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "호흡 위젯";
@@ -482,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6S73VSPTS8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BreathWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "호흡 위젯";
